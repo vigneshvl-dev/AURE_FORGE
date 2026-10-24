@@ -727,7 +727,13 @@
             function open() {
                 if (opened) return; opened = true;
                 intro.classList.add('open');
-                setTimeout(function () { intro.classList.add('done'); document.body.classList.remove('lock'); }, 1500);
+                setTimeout(function () {
+                    document.body.classList.add('revealed');
+                }, 200);
+                setTimeout(function () {
+                    intro.classList.add('done');
+                    document.body.classList.remove('lock');
+                }, 1500);
             }
             setTimeout(open, 2900);
             document.getElementById('skip').addEventListener('click', open);
