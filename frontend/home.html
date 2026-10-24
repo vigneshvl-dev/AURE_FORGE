@@ -157,6 +157,15 @@
             transform: scale(1.06)
         }
 
+        .brand .logo-img {
+            width: clamp(100px, 22vw, 160px);
+            height: auto;
+            object-fit: contain;
+            opacity: 0;
+            filter: drop-shadow(0 4px 20px rgba(201, 160, 106, .35));
+            animation: rise 1.1s .2s forwards
+        }
+
         .brand svg {
             width: clamp(96px, 20vw, 150px);
             height: auto;
@@ -611,9 +620,7 @@
     <div id="intro" role="presentation">
         <div class="slats"></div>
         <div class="brand">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
-                <use href="#mark" />
-            </svg>
+            <img class="logo-img" src="assets/logo.png" alt="Aureforge Logo" />
             <div class="name">AUREFORGE</div>
             <div class="tag">INTERIORS &amp; CUSTOM WOODWORK</div>
         </div>
@@ -621,9 +628,7 @@
     </div>
 
     <nav>
-        <a href="#top" class="logo"><svg viewBox="0 0 100 100" aria-hidden="true">
-                <use href="#mark" />
-            </svg>AUREFORGE</a>
+        <a href="#top" class="logo"><img src="assets/logo.png" alt="Aureforge Logo" style="width: 32px; height: auto; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(201, 160, 106, .4));" />AUREFORGE</a>
         <ul>
             <li><a href="#services">Services</a></li>
             <li><a href="#work">Work</a></li>
