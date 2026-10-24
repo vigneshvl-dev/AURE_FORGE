@@ -459,17 +459,7 @@
             isolation: isolate
         }
 
-        .tile::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            transition: transform .8s
-        }
 
-        .tile:hover::before {
-            transform: scale(1.06)
-        }
 
         .tile span {
             font-family: 'Cormorant Garamond', serif;
@@ -502,86 +492,55 @@
             grid-column: span 7
         }
 
-        .t1::before {
+        .slides {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            animation: t1Slideshow 12s infinite;
+            opacity: 0;
+            animation: crossfadeSlideshow 12s infinite;
+            transform: scale(1.02);
+            transition: transform 1.2s cubic-bezier(.22, 1, .36, 1);
         }
 
-        @keyframes t1Slideshow {
-            0%, 28% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/carved-wall-panelling.jpg');
-            }
-            33%, 61% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/timber-lumber-stacks.jpg');
-            }
-            66%, 95% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/wood-grain-texture.png');
-            }
-            100% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/carved-wall-panelling.jpg');
-            }
+        .tile:hover .slide {
+            transform: scale(1.08);
         }
 
-        .t2::before {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            animation: t2Slideshow 12s infinite;
+        .tile::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, .05) 0%, rgba(0, 0, 0, .3) 50%, rgba(0, 0, 0, .85) 100%);
+            pointer-events: none;
         }
 
-        @keyframes t2Slideshow {
-            0%, 28% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/mahogany-live-edge-slabs.jpg');
-            }
-            33%, 61% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/mahogany-logs.jpg');
-            }
-            66%, 95% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/mahogany-firewood-blocks.jpg');
-            }
-            100% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/mahogany-live-edge-slabs.jpg');
-            }
+        .tile span {
+            position: relative;
+            z-index: 1;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            text-shadow: 0 2px 14px rgba(0, 0, 0, .85);
         }
 
-        .t3::before {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            animation: t3Slideshow 12s infinite;
-        }
-
-        @keyframes t3Slideshow {
-            0%, 28% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/oak-wood-slab.png');
+        @keyframes crossfadeSlideshow {
+            0% {
+                opacity: 0;
             }
-            33%, 61% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/oak-logs-stack.jpg');
+            8%, 33.33% {
+                opacity: 1;
             }
-            66%, 95% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/oak-plank-workshop.jpg');
+            41.33%, 100% {
+                opacity: 0;
             }
-            100% {
-                background-image: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .75) 100%),
-                                  url('assets/oak-wood-slab.png');
-            }
-        }
-
-        .t4::before {
-            background: linear-gradient(135deg, #2f1d12, #4a2f1b 40%, #2a1a11), repeating-linear-gradient(80deg, transparent 0 20px, rgba(201, 160, 106, .1) 20px 22px)
         }
 
         @media(max-width:760px) {
@@ -751,11 +710,38 @@
             <p>A few recent pieces from our workshop.</p>
         </div>
         <div class="work">
-            <a class="tile t1" href="#contact"><span>Teak living room panelling<small>Fluted wall and TV
-                        unit</small></span></a>
-            <a class="tile t2" href="#contact"><span>Mahogany<small>Rich grain &amp; solid timber</small></span></a>
-            <a class="tile t3" href="#contact"><span>Oak<small>Natural tone &amp; dense texture</small></span></a>
-            <a class="tile t4" href="#contact"><span>Walk-in wardrobe<small>Veneer with brass handles</small></span></a>
+            <a class="tile t1" href="#contact">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('assets/carved-wall-panelling.jpg');"></div>
+                    <div class="slide" style="background-image: url('assets/timber-lumber-stacks.jpg'); animation-delay: 4s;"></div>
+                    <div class="slide" style="background-image: url('assets/wood-grain-texture.png'); animation-delay: 8s;"></div>
+                </div>
+                <span>Teak living room panelling<small>Fluted wall and TV unit</small></span>
+            </a>
+            <a class="tile t2" href="#contact">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('assets/mahogany-live-edge-slabs.jpg');"></div>
+                    <div class="slide" style="background-image: url('assets/mahogany-logs.jpg'); animation-delay: 4s;"></div>
+                    <div class="slide" style="background-image: url('assets/mahogany-firewood-blocks.jpg'); animation-delay: 8s;"></div>
+                </div>
+                <span>Mahogany<small>Rich grain &amp; solid timber</small></span>
+            </a>
+            <a class="tile t3" href="#contact">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('assets/oak-wood-slab.png');"></div>
+                    <div class="slide" style="background-image: url('assets/oak-logs-stack.jpg'); animation-delay: 4s;"></div>
+                    <div class="slide" style="background-image: url('assets/oak-plank-workshop.jpg'); animation-delay: 8s;"></div>
+                </div>
+                <span>Oak<small>Natural tone &amp; dense texture</small></span>
+            </a>
+            <a class="tile t4" href="#contact">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('assets/rosewood-carved-table.jpg');"></div>
+                    <div class="slide" style="background-image: url('assets/rosewood-planks-stack.jpg'); animation-delay: 4s;"></div>
+                    <div class="slide" style="background-image: url('assets/rosewood-raw-logs.jpg'); animation-delay: 8s;"></div>
+                </div>
+                <span>Indian Rosewood (Sheesham)<small>Hand-carved detailing &amp; dense hardwood</small></span>
+            </a>
         </div>
     </section>
 
