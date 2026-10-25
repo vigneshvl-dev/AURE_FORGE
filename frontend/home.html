@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>AUREFORGE – Interiors & Custom Woodwork</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&family=Poppins:wght@300;400;500;600&family=Syne:wght@700;800&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -304,70 +304,50 @@
         /* ---------- HERO ---------- */
         .hero {
             min-height: 100vh;
-            display: grid;
-            align-content: center;
-            padding: 130px clamp(20px, 7vw, 110px) 70px;
+            display: flex;
+            align-items: center;
+            padding: 130px clamp(20px, 6vw, 100px) 70px;
             position: relative;
             overflow: hidden;
-            background: radial-gradient(ellipse at 78% 40%, rgba(201, 160, 106, .12), transparent 55%), #000;
+            background: #000000;
         }
 
-        .hero::before {
-            content: "";
-            position: absolute;
-            right: -6vw;
-            top: 12%;
-            width: min(46vw, 560px);
-            aspect-ratio: 3/4;
-            border-radius: 2px;
-            background:
-                repeating-linear-gradient(92deg, rgba(0, 0, 0, .0) 0 11px, rgba(0, 0, 0, .22) 11px 12px, rgba(201, 160, 106, .07) 12px 19px),
-                linear-gradient(160deg, #8a5d36, #5b3a20 55%, #3a2413);
-            box-shadow: 0 40px 90px rgba(0, 0, 0, .6), inset 0 0 0 1px rgba(201, 160, 106, .25);
-            transform: rotate(3deg) scale(0.94);
-            opacity: 0;
-            transition: opacity 1.6s cubic-bezier(.22, 1, .36, 1) .3s, transform 1.6s cubic-bezier(.22, 1, .36, 1) .3s;
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1.15fr 0.95fr;
+            align-items: center;
+            gap: clamp(40px, 6vw, 90px);
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
-        .hero::after {
-            content: "";
-            position: absolute;
-            right: calc(-6vw + 22px);
-            top: calc(12% + 22px);
-            width: min(46vw, 560px);
-            aspect-ratio: 3/4;
-            border: 1px solid rgba(236, 227, 211, .35);
-            transform: rotate(3deg) scale(0.94);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1.6s cubic-bezier(.22, 1, .36, 1) .45s, transform 1.6s cubic-bezier(.22, 1, .36, 1) .45s;
-        }
-
-        body.revealed .hero::before {
-            opacity: 1;
-            transform: rotate(3deg) scale(1);
-        }
-
-        body.revealed .hero::after {
-            opacity: 1;
-            transform: rotate(3deg) scale(1);
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .hero h1 {
-            font-size: clamp(2.8rem, 8vw, 6.6rem);
-            max-width: 11ch;
-            position: relative;
+            font-size: clamp(2.8rem, 5.8vw, 5.4rem);
+            line-height: 1.08;
+            color: #ede3d4;
+            max-width: 13ch;
+            margin: 0 0 28px;
+            letter-spacing: -0.01em;
             opacity: 0;
             transform: translateY(24px);
             transition: opacity 1.3s cubic-bezier(.22, 1, .36, 1) .25s, transform 1.3s cubic-bezier(.22, 1, .36, 1) .25s;
         }
 
-        .hero p {
-            max-width: 46ch;
-            color: var(--mute);
-            font-size: 1.08rem;
-            margin: 26px 0 38px;
-            position: relative;
+        .hero p.hero-desc {
+            max-width: 44ch;
+            color: #9f9180;
+            font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+            line-height: 1.7;
+            margin: 0 0 38px;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1.3s cubic-bezier(.22, 1, .36, 1) .45s, transform 1.3s cubic-bezier(.22, 1, .36, 1) .45s;
@@ -375,27 +355,244 @@
 
         .hero .cta {
             display: flex;
-            gap: 14px;
+            gap: 16px;
             flex-wrap: wrap;
-            position: relative;
             opacity: 0;
             transform: translateY(16px);
             transition: opacity 1.3s cubic-bezier(.22, 1, .36, 1) .65s, transform 1.3s cubic-bezier(.22, 1, .36, 1) .65s;
         }
 
-        body.revealed .hero h1,
-        body.revealed .hero p,
-        body.revealed .hero .cta {
-            opacity: 1;
-            transform: translateY(0);
+        .hero .btn-hero-solid {
+            background: #bfa373;
+            color: #17110c;
+            font-weight: 400;
+            border: 1px solid #bfa373;
+            padding: 13px 30px;
+            font-size: 0.94rem;
+            letter-spacing: 0.02em;
+            border-radius: 2px;
+            transition: all 0.25s ease;
         }
 
-        @media(max-width:760px) {
+        .hero .btn-hero-solid:hover {
+            background: #cbb389;
+            box-shadow: 0 6px 20px rgba(191, 163, 115, 0.25);
+        }
 
-            .hero::before,
-            .hero::after {
-                opacity: .35;
-                width: 70vw
+        .hero .btn-hero-outline {
+            background: transparent;
+            color: #cbbba5;
+            border: 1px solid rgba(191, 163, 115, 0.35);
+            padding: 13px 30px;
+            font-size: 0.94rem;
+            letter-spacing: 0.02em;
+            border-radius: 2px;
+            transition: all 0.25s ease;
+        }
+
+        .hero .btn-hero-outline:hover {
+            border-color: #bfa373;
+            color: #ede3d4;
+            background: rgba(191, 163, 115, 0.08);
+        }
+
+        /* --- Timber Spotlight Card --- */
+        .hero-showcase {
+            position: relative;
+            opacity: 0;
+            transform: translateY(24px) scale(0.98);
+            transition: opacity 1.4s cubic-bezier(.22, 1, .36, 1) .4s, transform 1.4s cubic-bezier(.22, 1, .36, 1) .4s;
+        }
+
+        .timber-card {
+            background: linear-gradient(175deg, #15110d 0%, #0e0b08 100%);
+            border: 1px solid rgba(191, 163, 115, 0.16);
+            border-radius: 4px;
+            padding: clamp(24px, 3.5vw, 36px) clamp(20px, 3vw, 32px) clamp(22px, 3vw, 30px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(255, 255, 255, 0.03) inset;
+        }
+
+        .timber-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 160, 106, 0.35), transparent);
+        }
+
+        .tree-stage {
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .tree-stage svg {
+            width: 100%;
+            height: 100%;
+            max-height: 380px;
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
+            transition: transform 0.6s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .tree-stage:hover svg {
+            transform: scale(1.02);
+        }
+
+        /* Foliage transition effects */
+        .tree-canopy circle,
+        .tree-canopy ellipse,
+        .tree-trunk {
+            transition: fill 0.65s cubic-bezier(.22, 1, .36, 1), transform 0.65s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        /* Wood Type Pill Nav */
+        .wood-nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: clamp(14px, 2vw, 24px);
+            padding: 16px 0 18px;
+            border-top: 1px solid rgba(191, 163, 115, 0.15);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .wood-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .wood-tab {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 6px;
+            color: #7d7265;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.88rem;
+            letter-spacing: 0.03em;
+            transition: color 0.4s ease, opacity 0.4s ease;
+            white-space: nowrap;
+        }
+
+        .wood-tab .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .wood-tab:hover {
+            color: #c9b499;
+        }
+
+        .wood-tab.active {
+            color: #ece3d3;
+            font-weight: 400;
+        }
+
+        .wood-tab.active .dot {
+            transform: scale(1.35);
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        /* Timber Spec / Cross-Section info */
+        .timber-details {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(191, 163, 115, 0.12);
+        }
+
+        .wood-cross-section {
+            width: 66px;
+            height: 66px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .wood-cross-section svg {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s ease;
+        }
+
+        .wood-cross-section svg circle {
+            transition: stroke 0.65s ease, fill 0.65s ease;
+        }
+
+        .timber-info {
+            flex: 1;
+        }
+
+        .timber-info h4 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.55rem;
+            font-weight: 500;
+            color: #ede3d4;
+            margin: 0;
+            line-height: 1.15;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .timber-info .botanical {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 0.96rem;
+            color: #bfa373;
+            margin-left: 6px;
+            font-weight: 400;
+            transition: opacity 0.35s ease;
+        }
+
+        .timber-info p {
+            margin: 6px 0 0;
+            font-size: 0.88rem;
+            color: #8c8071;
+            line-height: 1.5;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        body.revealed .hero h1,
+        body.revealed .hero p.hero-desc,
+        body.revealed .hero .cta,
+        body.revealed .hero-showcase {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        @media(max-width: 960px) {
+            .hero {
+                padding-top: 110px;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero h1 {
+                max-width: none;
+            }
+
+            .tree-stage {
+                height: 300px;
+            }
+
+            .tree-stage svg {
+                max-height: 300px;
             }
         }
 
@@ -535,10 +732,14 @@
             0% {
                 opacity: 0;
             }
-            8%, 33.33% {
+
+            8%,
+            33.33% {
                 opacity: 1;
             }
-            41.33%, 100% {
+
+            41.33%,
+            100% {
                 opacity: 0;
             }
         }
@@ -551,6 +752,204 @@
             .t4 {
                 grid-column: span 12;
                 min-height: 260px
+            }
+        }
+
+        /* ---------- COLLECTIONS & WORKS SLIDER ---------- */
+        .collections-section {
+            background: #080605;
+            position: relative;
+            padding: clamp(80px, 11vw, 140px) clamp(20px, 6vw, 100px);
+            border-top: 1px solid rgba(201, 160, 106, 0.18);
+            border-bottom: 1px solid rgba(201, 160, 106, 0.18);
+            overflow: hidden;
+        }
+
+        .collections-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 48px;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .collections-header .head {
+            margin-bottom: 0;
+        }
+
+        .slider-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slider-btn {
+            background: rgba(26, 18, 12, 0.85);
+            border: 1px solid rgba(201, 160, 106, 0.35);
+            color: #ede3d4;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 1.1rem;
+        }
+
+        .slider-btn:hover {
+            background: #c9a06a;
+            color: #000;
+            border-color: #c9a06a;
+            transform: scale(1.06);
+        }
+
+        .collections-track-wrapper {
+            overflow: hidden;
+            position: relative;
+            margin: 0 -10px;
+            padding: 10px;
+        }
+
+        .collections-track {
+            display: flex;
+            gap: 26px;
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+            cursor: grab;
+        }
+
+        .collections-track:active {
+            cursor: grabbing;
+        }
+
+        .collection-card {
+            flex: 0 0 calc((100% - 52px) / 3);
+            min-width: 300px;
+            background: #110d0a;
+            border: 1px solid rgba(201, 160, 106, 0.18);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            aspect-ratio: 3 / 4;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201, 160, 106, 0.55);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(201, 160, 106, 0.12);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            flex: 1;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .collection-card:hover .card-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(13, 10, 8, 0.82);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(201, 160, 106, 0.3);
+            color: #c9a06a;
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-weight: 400;
+        }
+
+        .card-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .card-content h3 {
+            font-size: 1.45rem;
+            margin: 0 0 8px;
+            color: #ede3d4;
+            font-weight: 500;
+        }
+
+        .card-content p {
+            color: #9f9180;
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin: 0 0 20px;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(201, 160, 106, 0.12);
+            padding-top: 14px;
+            font-size: 0.84rem;
+            color: #c9a06a;
+            letter-spacing: 0.04em;
+        }
+
+        .card-footer span {
+            color: #8c8071;
+            font-size: 0.8rem;
+        }
+
+        .collections-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .collection-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(201, 160, 106, 0.25);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .collection-dot.active {
+            background: #c9a06a;
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(201, 160, 106, 0.6);
+        }
+
+        @media(max-width: 1024px) {
+            .collection-card {
+                flex: 0 0 calc((100% - 26px) / 2);
+            }
+        }
+
+        @media(max-width: 640px) {
+            .collection-card {
+                flex: 0 0 100%;
+                min-width: 260px;
             }
         }
 
@@ -590,7 +989,8 @@
         }
 
         .contact {
-            text-align: center
+            text-align: center;
+            background: #000;
         }
 
         .contact h2 {
@@ -605,15 +1005,224 @@
             margin: 0 auto 34px
         }
 
-        footer {
-            padding: 28px clamp(20px, 7vw, 110px) calc(28px + env(safe-area-inset-bottom, 0px));
-            border-top: 1px solid rgba(201, 160, 106, .2);
+        /* ---------- FOOTER ---------- */
+        .site-content {
+            position: relative;
+            background: var(--ink);
+        }
+
+        footer.site-footer {
+            position: relative;
+            width: 100%;
+            background: #14110e;
+            border-radius: 28px 28px 0 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(201, 160, 106, 0.35);
+            margin-top: 40px;
+            font-family: 'Poppins', 'Jost', sans-serif;
+            color: #ede3d4;
+            box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .footer-mark {
+            background: #0d0a08;
+            height: clamp(120px, 17vw, 260px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 clamp(16px, 3vw, 40px);
+            border-bottom: 1px solid rgba(201, 160, 106, 0.12);
+        }
+
+        .footer-mark span {
+            display: block;
+            width: 100%;
+            text-align: center;
+            white-space: nowrap;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(38px, 11.2vw, 170px);
+            line-height: 1;
+            letter-spacing: -.02em;
+            background: linear-gradient(180deg, #f5eee5 0%, #c59f64 50%, #4a3622 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .footer-body {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: clamp(32px, 4.5vw, 56px);
+            padding: clamp(48px, 7vw, 100px) clamp(24px, 7vw, 100px) 56px;
+        }
+
+        .footer-brand .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-brand .footer-logo img {
+            width: clamp(52px, 6vw, 72px);
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 16px rgba(201, 160, 106, 0.45));
+            transition: transform 0.3s ease;
+        }
+
+        .footer-brand .footer-logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .footer-brand .footer-tag {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            font-size: clamp(24px, 3.2vw, 42px);
+            line-height: 1.3;
+            margin: 0 0 46px;
+            max-width: 13em;
+            color: #ede3d4;
+        }
+
+        .footer-brand .footer-cta {
+            display: inline-block;
+            color: #ede3d4;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: .12em;
+            font-size: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(201, 160, 106, 0.4);
+            transition: all .25s ease;
+            text-transform: lowercase;
+        }
+
+        .footer-brand .footer-cta:hover {
+            border-color: #b8914a;
+            color: #c9a06a;
+        }
+
+        .footer-col h4 {
+            margin: 0 0 26px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            color: #ede3d4;
+            letter-spacing: 0.05em;
+            text-transform: lowercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 16px;
+        }
+
+        .footer-col ul li a {
+            color: #9f9180;
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 15px;
+            transition: color .2s;
+            text-transform: lowercase;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ede3d4;
+        }
+
+        .footer-contact .contact-link {
+            color: #ede3d4;
+            font-weight: 400;
+            display: block;
+            margin-bottom: 12px;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-contact .contact-link:hover {
+            color: #c9a06a;
+        }
+
+        .footer-contact p {
+            margin: 22px 0 0;
+            color: #7d7265;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .footer-base {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            gap: 16px;
             flex-wrap: wrap;
-            gap: 10px;
-            color: var(--mute);
-            font-size: .85rem
+            padding: 0 clamp(24px, 7vw, 100px) 48px;
+            margin-top: clamp(10px, 4vw, 60px);
+            font-size: 14px;
+            font-weight: 300;
+            color: #7d7265;
+        }
+
+        .footer-base b {
+            color: #ede3d4;
+            font-weight: 500;
+        }
+
+        .footer-soc {
+            display: flex;
+            gap: 36px;
+        }
+
+        .footer-soc a {
+            color: #ede3d4;
+            font-weight: 500;
+            letter-spacing: .08em;
+            font-size: 13px;
+            transition: color .2s;
+            text-transform: lowercase;
+        }
+
+        .footer-soc a:hover {
+            color: #c9a06a;
+        }
+
+        @media(max-width: 960px) {
+            .footer-body {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media(max-width: 540px) {
+            .footer-body {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-mark {
+                height: clamp(80px, 16vw, 130px);
+                padding: 0 10px;
+            }
+
+            .footer-mark span {
+                font-size: clamp(26px, 10.5vw, 48px);
+                letter-spacing: -.01em;
+            }
+
+            .footer-soc {
+                gap: 20px;
+            }
         }
 
         @media(prefers-reduced-motion:reduce) {
@@ -657,125 +1266,385 @@
         <ul>
             <li><a href="#services">Services</a></li>
             <li><a href="#work">Work</a></li>
+            <li><a href="#collections">Collections</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <a class="btn" href="#contact">Get a quote</a>
     </nav>
 
-    <header class="hero" id="top">
-        <h1>Wood, forged into your home.</h1>
-        <p>AUREFORGE designs and builds interiors and custom woodwork: wardrobes, kitchens, panelling, doors and
-            furniture, made to your space and finished by hand.</p>
-        <div class="cta"><a class="btn solid" href="#contact">Book a free consultation</a><a class="btn"
-                href="#work">See our work</a></div>
-    </header>
-
-    <section id="services">
-        <div class="head">
-            <h2>What we build</h2>
-            <p>Every piece is measured on site, cut in our workshop and installed by our own team.</p>
-        </div>
-        <div class="services">
-            <div>
-                <h3>Modular kitchens</h3>
-                <p>Solid wood and veneer kitchens planned around how you cook.</p>
-            </div>
-            <div>
-                <h3>Wardrobes &amp; storage</h3>
-                <p>Walk-ins, sliding and hinged wardrobes fitted wall to wall.</p>
-            </div>
-            <div>
-                <h3>Wall panelling &amp; ceilings</h3>
-                <p>Fluted panels, false ceilings and feature walls in teak, oak and walnut.</p>
-            </div>
-            <div>
-                <h3>Custom furniture</h3>
-                <p>Beds, tables, TV units and pooja units drawn to your size and style.</p>
-            </div>
-            <div>
-                <h3>Doors &amp; windows</h3>
-                <p>Hand-finished main doors and frames built to last decades.</p>
-            </div>
-            <div>
-                <h3>Full interiors</h3>
-                <p>One team for design, woodwork, lighting and handover.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="work">
-        <div class="head">
-            <h2>Selected Materials</h2>
-            <p>A few recent pieces from our workshop.</p>
-        </div>
-        <div class="work">
-            <a class="tile t1" href="#contact">
-                <div class="slides">
-                    <div class="slide" style="background-image: url('assets/carved-wall-panelling.jpg');"></div>
-                    <div class="slide" style="background-image: url('assets/timber-lumber-stacks.jpg'); animation-delay: 4s;"></div>
-                    <div class="slide" style="background-image: url('assets/wood-grain-texture.png'); animation-delay: 8s;"></div>
+    <div class="site-content">
+        <header class="hero" id="top">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <h1>Interiors grown from the finest timber.</h1>
+                    <p class="hero-desc">We design and build bespoke wood interiors for homes, hotels and offices. Every
+                        piece starts with one tree, chosen for its grain, its colour and its character.</p>
+                    <div class="cta">
+                        <a class="btn-hero-solid" href="#work">View interiors</a>
+                        <a class="btn-hero-outline" href="#contact">Start a project</a>
+                    </div>
                 </div>
-                <span>Teak living room panelling<small>Fluted wall and TV unit</small></span>
-            </a>
-            <a class="tile t2" href="#contact">
-                <div class="slides">
-                    <div class="slide" style="background-image: url('assets/mahogany-live-edge-slabs.jpg');"></div>
-                    <div class="slide" style="background-image: url('assets/mahogany-logs.jpg'); animation-delay: 4s;"></div>
-                    <div class="slide" style="background-image: url('assets/mahogany-firewood-blocks.jpg'); animation-delay: 8s;"></div>
-                </div>
-                <span>Mahogany<small>Rich grain &amp; solid timber</small></span>
-            </a>
-            <a class="tile t3" href="#contact">
-                <div class="slides">
-                    <div class="slide" style="background-image: url('assets/oak-wood-slab.png');"></div>
-                    <div class="slide" style="background-image: url('assets/oak-logs-stack.jpg'); animation-delay: 4s;"></div>
-                    <div class="slide" style="background-image: url('assets/oak-plank-workshop.jpg'); animation-delay: 8s;"></div>
-                </div>
-                <span>Oak<small>Natural tone &amp; dense texture</small></span>
-            </a>
-            <a class="tile t4" href="#contact">
-                <div class="slides">
-                    <div class="slide" style="background-image: url('assets/rosewood-carved-table.jpg');"></div>
-                    <div class="slide" style="background-image: url('assets/rosewood-planks-stack.jpg'); animation-delay: 4s;"></div>
-                    <div class="slide" style="background-image: url('assets/rosewood-raw-logs.jpg'); animation-delay: 8s;"></div>
-                </div>
-                <span>Indian Rosewood (Sheesham)<small>Hand-carved detailing &amp; dense hardwood</small></span>
-            </a>
-        </div>
-    </section>
 
-    <section id="process" class="process">
-        <div class="head">
-            <h2>How we work</h2>
-        </div>
-        <div class="steps">
-            <div>
-                <h3>Consult</h3>
-                <p>We visit, listen and take measurements.</p>
-            </div>
-            <div>
-                <h3>Design</h3>
-                <p>You approve drawings and 3D views, then a fixed quote.</p>
-            </div>
-            <div>
-                <h3>Craft</h3>
-                <p>Pieces are made in our workshop and checked before they ship.</p>
-            </div>
-            <div>
-                <h3>Install</h3>
-                <p>Our team fits, finishes and hands over a clean room.</p>
-            </div>
-        </div>
-    </section>
+                <div class="hero-showcase">
+                    <div class="timber-card">
+                        <div class="tree-stage">
+                            <svg viewBox="0 0 420 440" fill="none" xmlns="http://www.w3.org/2000/svg" id="treeSvg">
+                                <defs>
+                                    <radialGradient id="stageGlow" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#c9a06a" stop-opacity="0.12" />
+                                        <stop offset="100%" stop-color="#c9a06a" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="shadowGrad" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#000000" stop-opacity="0.7" />
+                                        <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+                                    </radialGradient>
+                                </defs>
+                                <!-- Ambient back glow -->
+                                <ellipse cx="210" cy="220" rx="190" ry="190" fill="url(#stageGlow)" />
 
-    <section id="contact" class="contact">
-        <h2>Let’s build something in wood.</h2>
-        <p>Tell us about your space and we’ll reply within one working day.</p>
-        <a class="btn solid" href="mailto:hello@aureforge.com">hello@aureforge.com</a>
-    </section>
+                                <!-- Ground shadow -->
+                                <ellipse cx="210" cy="385" rx="140" ry="20" fill="url(#shadowGrad)" />
 
-    <footer><span>© 2026 AUREFORGE. All rights reserved.</span><span>Interiors &amp; custom woodwork</span></footer>
+                                <!-- Trunk & Main Branches -->
+                                <g class="tree-trunk-group">
+                                    <!-- Base and trunk -->
+                                    <path id="trunkPath"
+                                        d="M196 230 C196 290 190 350 178 384 C190 383 230 383 242 384 C230 350 224 290 224 230 Z"
+                                        fill="#6d533a" />
+                                    <!-- Root flare detail -->
+                                    <path id="trunkFlare"
+                                        d="M178 384 C184 374 194 372 200 376 C206 380 214 380 220 376 C226 372 236 374 242 384 Z"
+                                        fill="#58422d" opacity="0.6" />
+                                    <!-- Branches branching into foliage -->
+                                    <path id="branchLeft"
+                                        d="M198 250 Q165 210 145 195 Q152 190 162 195 Q180 215 204 240 Z"
+                                        fill="#5c442e" />
+                                    <path id="branchRight"
+                                        d="M222 245 Q255 210 275 198 Q268 193 258 198 Q240 215 216 235 Z"
+                                        fill="#5c442e" />
+                                </g>
+
+                                <!-- Leaf Canopy Clusters -->
+                                <g class="tree-canopy" id="treeCanopy">
+                                    <!-- Back foliage layer -->
+                                    <ellipse cx="270" cy="145" rx="55" ry="50" fill="#4d612e" opacity="0.85" />
+                                    <ellipse cx="150" cy="150" rx="52" ry="48" fill="#4d612e" opacity="0.85" />
+                                    <ellipse cx="210" cy="115" rx="60" ry="55" fill="#577033" opacity="0.9" />
+
+                                    <!-- Mid foliage layer -->
+                                    <ellipse cx="115" cy="205" rx="58" ry="50" fill="#597334" opacity="0.9" />
+                                    <ellipse cx="305" cy="205" rx="60" ry="52" fill="#526a31" opacity="0.9" />
+                                    <ellipse cx="170" cy="210" rx="52" ry="46" fill="#607c39" opacity="0.92" />
+                                    <ellipse cx="250" cy="215" rx="54" ry="48" fill="#5b7636" opacity="0.92" />
+                                    <ellipse cx="210" cy="175" rx="68" ry="58" fill="#66853e" opacity="0.95" />
+
+                                    <!-- Front highlight clusters -->
+                                    <ellipse cx="140" cy="255" rx="50" ry="44" fill="#6d8e43" />
+                                    <ellipse cx="280" cy="255" rx="52" ry="44" fill="#64833c" />
+                                    <ellipse cx="210" cy="270" rx="72" ry="56" fill="#759948" />
+                                    <ellipse cx="175" cy="285" rx="42" ry="36" fill="#7ba34b" />
+                                    <ellipse cx="245" cy="285" rx="44" ry="36" fill="#709344" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Wood Selector Tabs -->
+                        <div class="wood-nav">
+                            <button class="wood-tab active" data-wood="teak" type="button">
+                                <span class="dot" style="background: #bfa373;"></span>
+                                Teak
+                            </button>
+                            <button class="wood-tab" data-wood="oak" type="button">
+                                <span class="dot" style="background: #d4a76a;"></span>
+                                Oak
+                            </button>
+                            <button class="wood-tab" data-wood="mahogany" type="button">
+                                <span class="dot" style="background: #963d2c;"></span>
+                                Mahogany
+                            </button>
+                            <button class="wood-tab" data-wood="rosewood" type="button">
+                                <span class="dot" style="background: #6e322b;"></span>
+                                Indian rosewood
+                            </button>
+                        </div>
+
+                        <!-- Selected Wood Details & Cross Section -->
+                        <div class="timber-details">
+                            <div class="wood-cross-section">
+                                <svg viewBox="0 0 100 100" id="crossSectionSvg">
+                                    <circle cx="50" cy="50" r="48" fill="#bfa373" id="ringBg" />
+                                    <circle cx="50" cy="50" r="42" fill="none" stroke="#7e6037" stroke-width="2.5"
+                                        opacity="0.55" id="ring1" />
+                                    <circle cx="50" cy="50" r="35" fill="none" stroke="#684c26" stroke-width="2.5"
+                                        opacity="0.6" id="ring2" />
+                                    <circle cx="50" cy="50" r="28" fill="none" stroke="#523918" stroke-width="2.5"
+                                        opacity="0.65" id="ring3" />
+                                    <circle cx="50" cy="50" r="20" fill="none" stroke="#412c11" stroke-width="3"
+                                        opacity="0.75" id="ring4" />
+                                    <circle cx="50" cy="50" r="12" fill="none" stroke="#322009" stroke-width="3"
+                                        opacity="0.8" id="ring5" />
+                                    <circle cx="50" cy="50" r="5" fill="#241606" id="ringCore" />
+                                </svg>
+                            </div>
+                            <div class="timber-info">
+                                <h4><span id="woodName">Teak</span><span class="botanical" id="woodBotanical">Tectona
+                                        grandis</span></h4>
+                                <p id="woodDesc">Tall, straight and golden. Natural oils make it resistant to water and
+                                    termites.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="services">
+            <div class="head">
+                <h2>What we build</h2>
+                <p>Every piece is measured on site, cut in our workshop and installed by our own team.</p>
+            </div>
+            <div class="services">
+                <div>
+                    <h3>Modular kitchens</h3>
+                    <p>Solid wood and veneer kitchens planned around how you cook.</p>
+                </div>
+                <div>
+                    <h3>Wardrobes &amp; storage</h3>
+                    <p>Walk-ins, sliding and hinged wardrobes fitted wall to wall.</p>
+                </div>
+                <div>
+                    <h3>Wall panelling &amp; ceilings</h3>
+                    <p>Fluted panels, false ceilings and feature walls in teak, oak and walnut.</p>
+                </div>
+                <div>
+                    <h3>Custom furniture</h3>
+                    <p>Beds, tables, TV units and pooja units drawn to your size and style.</p>
+                </div>
+                <div>
+                    <h3>Doors &amp; windows</h3>
+                    <p>Hand-finished main doors and frames built to last decades.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="work">
+            <div class="head">
+                <h2>Selected Materials</h2>
+                <p>A few recent pieces from our workshop.</p>
+            </div>
+            <div class="work">
+                <a class="tile t1" href="#contact">
+                    <div class="slides">
+                        <div class="slide" style="background-image: url('assets/carved-wall-panelling.jpg');"></div>
+                        <div class="slide"
+                            style="background-image: url('assets/timber-lumber-stacks.jpg'); animation-delay: 4s;">
+                        </div>
+                        <div class="slide"
+                            style="background-image: url('assets/wood-grain-texture.png'); animation-delay: 8s;"></div>
+                    </div>
+                    <span>Teak <small>Fluted wall and TV unit</small></span>
+                </a>
+                <a class="tile t2" href="#contact">
+                    <div class="slides">
+                        <div class="slide" style="background-image: url('assets/mahogany-live-edge-slabs.jpg');"></div>
+                        <div class="slide"
+                            style="background-image: url('assets/mahogany-logs.jpg'); animation-delay: 4s;">
+                        </div>
+                        <div class="slide"
+                            style="background-image: url('assets/mahogany-firewood-blocks.jpg'); animation-delay: 8s;">
+                        </div>
+                    </div>
+                    <span>Mahogany<small>Rich grain &amp; solid timber</small></span>
+                </a>
+                <a class="tile t3" href="#contact">
+                    <div class="slides">
+                        <div class="slide" style="background-image: url('assets/oak-wood-slab.png');"></div>
+                        <div class="slide"
+                            style="background-image: url('assets/oak-logs-stack.jpg'); animation-delay: 4s;">
+                        </div>
+                        <div class="slide"
+                            style="background-image: url('assets/oak-plank-workshop.jpg'); animation-delay: 8s;"></div>
+                    </div>
+                    <span>Oak<small>Natural tone &amp; dense texture</small></span>
+                </a>
+                <a class="tile t4" href="#contact">
+                    <div class="slides">
+                        <div class="slide" style="background-image: url('assets/rosewood-carved-table.jpg');"></div>
+                        <div class="slide"
+                            style="background-image: url('assets/rosewood-planks-stack.jpg'); animation-delay: 4s;">
+                        </div>
+                        <div class="slide"
+                            style="background-image: url('assets/rosewood-raw-logs.jpg'); animation-delay: 8s;"></div>
+                    </div>
+                    <span>Indian Rosewood (Sheesham)<small>Hand-carved detailing &amp; dense hardwood</small></span>
+                </a>
+            </div>
+        </section>
+
+        <section id="collections" class="collections-section">
+            <div class="collections-header">
+                <div class="head">
+                    <h2>Our Collections &amp; Works</h2>
+                    <p>Signature custom woodwork and hand-selected timber creations from our artisan studio.</p>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn prev-btn" id="colPrevBtn" aria-label="Previous slide"
+                        type="button">←</button>
+                    <button class="slider-btn next-btn" id="colNextBtn" aria-label="Next slide" type="button">→</button>
+                </div>
+            </div>
+
+            <div class="collections-track-wrapper" id="colTrackWrapper">
+                <div class="collections-track" id="colTrack">
+                    <!-- Slide 1 -->
+                    <article class="collection-card">
+                        <div class="card-img-wrap">
+                            <img src="assets/wood-1.jpg" alt="Live-Edge Walnut Dining Table" loading="lazy" />
+                            <span class="card-badge">Bespoke Tables</span>
+                        </div>
+                    </article>
+
+                    <!-- Slide 2 -->
+                    <article class="collection-card">
+                        <div class="card-img-wrap">
+                            <img src="assets/wood-2.jpg" alt="Architectural Fluted Wall Paneling" loading="lazy" />
+                            <span class="card-badge">Wall Architecture</span>
+                        </div>
+                    </article>
+
+                    <!-- Slide 3 -->
+                    <article class="collection-card">
+                        <div class="card-img-wrap">
+                            <img src="assets/wood-3.jpg" alt="Artisan Sculptural Credenza" loading="lazy" />
+                            <span class="card-badge">Custom Cabinetry</span>
+                        </div>
+                    </article>
+
+                    <!-- Slide 4 -->
+                    <article class="collection-card">
+                        <div class="card-img-wrap">
+                            <img src="assets/wood-4.jpg" alt="Handcrafted Main Pivot Door" loading="lazy" />
+                            <span class="card-badge">Entryways</span>
+                        </div>
+                    </article>
+
+                    <!-- Slide 5 -->
+                    <article class="collection-card">
+                        <div class="card-img-wrap">
+                            <img src="assets/wood-5.jpg" alt="Minimalist Platform Bed Frame" loading="lazy" />
+                            <span class="card-badge">Bedroom Suite</span>
+                        </div>
+                    </article>
+
+                    <!-- Slide 6 -->
+                    <article class="collection-card">
+                        <div class="card-img-wrap">
+                            <img src="assets/wood-6.jpg" alt="Integrated Island Kitchen" loading="lazy" />
+                            <span class="card-badge">Kitchen Systems</span>
+                        </div>
+                    </article>
+
+                    <!-- Slide 7 -->
+                    <article class="collection-card">
+                        <div class="card-img-wrap">
+                            <img src="assets/wood-7.jpg" alt="Walk-in Wardrobe Wardrobe System" loading="lazy" />
+                            <span class="card-badge">Storage</span>
+                        </div>
+                    </article>
+
+                    <!-- Slide 8 -->
+                    <article class="collection-card">
+                        <div class="card-img-wrap">
+                            <img src="assets/wood-8.jpg" alt="Sculptural Ceiling Beams" loading="lazy" />
+                            <span class="card-badge">Ceilings</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="collections-dots" id="colDots"></div>
+        </section>
+
+        <section id="process" class="process">
+            <div class="head">
+                <h2>How we work</h2>
+            </div>
+            <div class="steps">
+                <div>
+                    <h3>Consult</h3>
+                    <p>We visit, listen and take measurements.</p>
+                </div>
+                <div>
+                    <h3>Design</h3>
+                    <p>You approve drawings and 3D views, then a fixed quote.</p>
+                </div>
+                <div>
+                    <h3>Craft</h3>
+                    <p>Pieces are made in our workshop and checked before they ship.</p>
+                </div>
+                <div>
+                    <h3>Install</h3>
+                    <p>Our team fits, finishes and hands over a clean room.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Let’s build something in wood.</h2>
+            <p>Tell us about your space and we’ll reply within one working day.</p>
+            <a class="btn solid" href="mailto:hello@aureforge.com">hello@aureforge.com</a>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-mark" aria-hidden="true">
+            <span>aureforge</span>
+        </div>
+        <div class="footer-body">
+            <div class="footer-brand">
+                <a href="#top" class="footer-logo" aria-label="Aureforge">
+                    <img src="assets/logo.png" alt="Aureforge Logo" />
+                </a>
+                <p class="footer-tag">aureforge — wood interiors, built to last.</p>
+                <a class="footer-cta" href="#contact">get a free quote</a>
+            </div>
+            <div class="footer-col">
+                <h4>studio</h4>
+                <ul>
+                    <li><a href="#services">who we are</a></li>
+                    <li><a href="#work">our projects</a></li>
+                    <li><a href="#work">materials</a></li>
+                    <li><a href="#contact">careers</a></li>
+                    <li><a href="#contact">visit our workshop</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>services</h4>
+                <ul>
+                    <li><a href="#services">modular kitchens</a></li>
+                    <li><a href="#services">wardrobes</a></li>
+                    <li><a href="#services">custom furniture</a></li>
+                    <li><a href="#services">wall paneling</a></li>
+                    <li><a href="#services">doors &amp; windows</a></li>
+                    <li><a href="#services">false ceilings</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact">
+                <h4>contact</h4>
+                <a class="contact-link main" href="mailto:hello@aureforge.com">hello@aureforge.com</a>
+                <a class="contact-link main" href="tel:+910000000000">+91 00000 00000</a>
+                <p>Workshop &amp; Studio,<br>Chennai, Tamil Nadu,<br>India 600001</p>
+            </div>
+        </div>
+        <div class="footer-base">
+            <span>© 2026 <b>aureforge</b>. all rights reserved.</span>
+            <div class="footer-soc">
+                <a href="https://instagram.com" target="_blank" rel="noopener">instagram ↗</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener">linkedin ↗</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         (function () {
@@ -794,6 +1663,376 @@
             }
             setTimeout(open, 2900);
             document.getElementById('skip').addEventListener('click', open);
+
+            // Wood Species Interactive Showcase
+            var woodData = {
+                teak: {
+                    name: 'Teak',
+                    botanical: 'Tectona grandis',
+                    desc: 'Tall, straight and golden. Natural oils make it resistant to water and termites.',
+                    trunk: '#6d533a',
+                    trunkFlare: '#58422d',
+                    leaves: ['#4d612e', '#4d612e', '#577033', '#597334', '#526a31', '#607c39', '#5b7636', '#66853e', '#6d8e43', '#64833c', '#759948', '#7ba34b', '#709344'],
+                    ringBg: '#bfa373',
+                    rings: ['#7e6037', '#684c26', '#523918', '#412c11', '#322009'],
+                    ringCore: '#241606'
+                },
+                oak: {
+                    name: 'Oak',
+                    botanical: 'Quercus robur',
+                    desc: 'Dense, durable and pale gold. Prominent open grain with exceptional strength for heritage joinery.',
+                    trunk: '#5a4635',
+                    trunkFlare: '#483728',
+                    leaves: ['#3e5425', '#465e2b', '#4e6931', '#537034', '#4b652f', '#587737', '#5f803c', '#688d42', '#6b9244', '#60843d', '#729b48', '#7aa54e', '#6f9646'],
+                    ringBg: '#d2b079',
+                    rings: ['#8f7044', '#795b32', '#654823', '#513718', '#3e280f'],
+                    ringCore: '#2b1a08'
+                },
+                mahogany: {
+                    name: 'Mahogany',
+                    botanical: 'Swietenia macrophylla',
+                    desc: 'Lustrous, reddish-brown and fine-grained. Matures to a deep wine patina with incredible chatoyancy.',
+                    trunk: '#4a251e',
+                    trunkFlare: '#381b16',
+                    leaves: ['#3d562b', '#45602f', '#4c6b35', '#527339', '#4a6733', '#5b803f', '#5f8442', '#679047', '#6c964b', '#628a43', '#719d4e', '#78a653', '#6ea04c'],
+                    ringBg: '#964332',
+                    rings: ['#783023', '#65251a', '#541d13', '#43150d', '#330e08'],
+                    ringCore: '#220804'
+                },
+                rosewood: {
+                    name: 'Indian Rosewood',
+                    botanical: 'Dalbergia latifolia',
+                    desc: 'Deep purple-brown heartwood with dark ribbon veining. Prized for luxury acoustic and artisanal cabinetry.',
+                    trunk: '#3c2423',
+                    trunkFlare: '#2c1919',
+                    leaves: ['#364d26', '#3d572c', '#436131', '#486835', '#415d2f', '#4f733a', '#547b3e', '#5a8442', '#5e8a46', '#557c3e', '#629149', '#6a9b4f', '#5e8c45'],
+                    ringBg: '#66332c',
+                    rings: ['#52241e', '#431b16', '#35130f', '#2a0d0a', '#1f0806'],
+                    ringCore: '#150403'
+                }
+            };
+
+            var woodKeys = ['teak', 'oak', 'mahogany', 'rosewood'];
+            var currentWoodIndex = 0;
+            var autoInterval = null;
+            var isHovered = false;
+
+            var tabs = document.querySelectorAll('.wood-tab');
+            var timberCard = document.querySelector('.timber-card');
+            var woodNameEl = document.getElementById('woodName');
+            var woodBotanicalEl = document.getElementById('woodBotanical');
+            var woodDescEl = document.getElementById('woodDesc');
+            var trunkEl = document.getElementById('trunkPath');
+            var trunkFlareEl = document.getElementById('trunkFlare');
+            var canopyEllipses = document.querySelectorAll('#treeCanopy ellipse');
+            var ringBg = document.getElementById('ringBg');
+            var ringCore = document.getElementById('ringCore');
+            var rings = [
+                document.getElementById('ring1'),
+                document.getElementById('ring2'),
+                document.getElementById('ring3'),
+                document.getElementById('ring4'),
+                document.getElementById('ring5')
+            ];
+
+            function switchWood(woodKey) {
+                var data = woodData[woodKey];
+                if (!data) return;
+
+                currentWoodIndex = woodKeys.indexOf(woodKey);
+
+                tabs.forEach(function (t) {
+                    if (t.getAttribute('data-wood') === woodKey) {
+                        t.classList.add('active');
+                    } else {
+                        t.classList.remove('active');
+                    }
+                });
+
+                // Smooth text transition
+                woodNameEl.style.opacity = 0;
+                woodNameEl.style.transform = 'translateY(4px)';
+                woodBotanicalEl.style.opacity = 0;
+                woodDescEl.style.opacity = 0;
+                woodDescEl.style.transform = 'translateY(4px)';
+
+                setTimeout(function () {
+                    woodNameEl.textContent = data.name;
+                    woodBotanicalEl.textContent = data.botanical;
+                    woodDescEl.textContent = data.desc;
+                    woodNameEl.style.opacity = 1;
+                    woodNameEl.style.transform = 'translateY(0)';
+                    woodBotanicalEl.style.opacity = 1;
+                    woodDescEl.style.opacity = 1;
+                    woodDescEl.style.transform = 'translateY(0)';
+                }, 180);
+
+                // Update trunk colors
+                trunkEl.setAttribute('fill', data.trunk);
+                trunkFlareEl.setAttribute('fill', data.trunkFlare);
+
+                // Update canopy leaves
+                canopyEllipses.forEach(function (leaf, idx) {
+                    if (data.leaves[idx]) {
+                        leaf.setAttribute('fill', data.leaves[idx]);
+                    }
+                });
+
+                // Update wood cross section colors
+                ringBg.setAttribute('fill', data.ringBg);
+                ringCore.setAttribute('fill', data.ringCore);
+                rings.forEach(function (ring, idx) {
+                    if (ring && data.rings[idx]) {
+                        ring.setAttribute('stroke', data.rings[idx]);
+                    }
+                });
+            }
+
+            function nextWood() {
+                if (isHovered) return;
+                currentWoodIndex = (currentWoodIndex + 1) % woodKeys.length;
+                switchWood(woodKeys[currentWoodIndex]);
+            }
+
+            function startAutoCycle() {
+                stopAutoCycle();
+                autoInterval = setInterval(nextWood, 3500);
+            }
+
+            function stopAutoCycle() {
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                    autoInterval = null;
+                }
+            }
+
+            // Click listener for manual selection
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    var woodKey = this.getAttribute('data-wood');
+                    switchWood(woodKey);
+                    startAutoCycle(); // reset timer on manual selection
+                });
+            });
+
+            // Pause auto-cycle when hovering over the timber card
+            if (timberCard) {
+                timberCard.addEventListener('mouseenter', function () {
+                    isHovered = true;
+                });
+                timberCard.addEventListener('mouseleave', function () {
+                    isHovered = false;
+                });
+            }
+
+            // Start auto cycling
+            startAutoCycle();
+
+            // ---------- COLLECTIONS & WORKS CAROUSEL LOGIC ----------
+            (function initCollectionsSlider() {
+                var track = document.getElementById('colTrack');
+                var prevBtn = document.getElementById('colPrevBtn');
+                var nextBtn = document.getElementById('colNextBtn');
+                var dotsContainer = document.getElementById('colDots');
+                if (!track) return;
+
+                var cards = track.querySelectorAll('.collection-card');
+                var totalCards = cards.length;
+                var currentIndex = 0;
+
+                function getVisibleCount() {
+                    if (window.innerWidth <= 640) return 1;
+                    if (window.innerWidth <= 1024) return 2;
+                    return 3;
+                }
+
+                function getMaxIndex() {
+                    return Math.max(0, totalCards - getVisibleCount());
+                }
+
+                // Build Dots
+                function buildDots() {
+                    if (!dotsContainer) return;
+                    dotsContainer.innerHTML = '';
+                    var maxIdx = getMaxIndex();
+                    for (var i = 0; i <= maxIdx; i++) {
+                        var dot = document.createElement('button');
+                        dot.className = 'collection-dot' + (i === currentIndex ? ' active' : '');
+                        dot.setAttribute('type', 'button');
+                        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                        dot.dataset.index = i;
+                        dot.addEventListener('click', function () {
+                            goToIndex(parseInt(this.dataset.index, 10));
+                        });
+                        dotsContainer.appendChild(dot);
+                    }
+                }
+
+                function updateTrack() {
+                    var visible = getVisibleCount();
+                    var maxIdx = getMaxIndex();
+                    if (currentIndex > maxIdx) currentIndex = maxIdx;
+
+                    var cardWidth = cards[0].getBoundingClientRect().width;
+                    var gap = 26;
+                    var offset = currentIndex * (cardWidth + gap);
+                    track.style.transform = 'translateX(-' + offset + 'px)';
+
+                    // Update dot indicators
+                    if (dotsContainer) {
+                        var dots = dotsContainer.querySelectorAll('.collection-dot');
+                        dots.forEach(function (d, idx) {
+                            if (idx === currentIndex) {
+                                d.classList.add('active');
+                            } else {
+                                d.classList.remove('active');
+                            }
+                        });
+                    }
+
+                    // Button states
+                    if (prevBtn) prevBtn.style.opacity = currentIndex === 0 ? '0.45' : '1';
+                    if (nextBtn) nextBtn.style.opacity = currentIndex >= maxIdx ? '0.45' : '1';
+                }
+
+                function goToIndex(idx) {
+                    var maxIdx = getMaxIndex();
+                    currentIndex = Math.max(0, Math.min(idx, maxIdx));
+                    updateTrack();
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', function () {
+                        if (currentIndex > 0) {
+                            goToIndex(currentIndex - 1);
+                        } else {
+                            goToIndex(getMaxIndex()); // loop around
+                        }
+                    });
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function () {
+                        var maxIdx = getMaxIndex();
+                        if (currentIndex < maxIdx) {
+                            goToIndex(currentIndex + 1);
+                        } else {
+                            goToIndex(0); // loop around
+                        }
+                    });
+                }
+
+                // Touch & Drag Support
+                var startX = 0;
+                var currentX = 0;
+                var isDragging = false;
+
+                track.addEventListener('mousedown', function (e) {
+                    isDragging = true;
+                    startX = e.pageX;
+                    track.style.transition = 'none';
+                });
+
+                window.addEventListener('mousemove', function (e) {
+                    if (!isDragging) return;
+                    currentX = e.pageX;
+                });
+
+                window.addEventListener('mouseup', function () {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    track.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+                    var diff = startX - currentX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            goToIndex(currentIndex + 1);
+                        } else {
+                            goToIndex(currentIndex - 1);
+                        }
+                    } else {
+                        updateTrack();
+                    }
+                });
+
+                // Touch events
+                track.addEventListener('touchstart', function (e) {
+                    startX = e.touches[0].pageX;
+                }, { passive: true });
+
+                track.addEventListener('touchend', function (e) {
+                    var endX = e.changedTouches[0].pageX;
+                    var diff = startX - endX;
+                    if (Math.abs(diff) > 40) {
+                        if (diff > 0) {
+                            goToIndex(currentIndex + 1);
+                        } else {
+                            goToIndex(currentIndex - 1);
+                        }
+                    }
+                }, { passive: true });
+
+                window.addEventListener('resize', function () {
+                    buildDots();
+                    updateTrack();
+                });
+
+                buildDots();
+                updateTrack();
+
+                // ---------- AUTO-SCROLL ----------
+                var autoInterval = null;
+                var autoDelay = 3000; // ms between slides
+
+                function autoAdvance() {
+                    var maxIdx = getMaxIndex();
+                    if (currentIndex < maxIdx) {
+                        goToIndex(currentIndex + 1);
+                    } else {
+                        goToIndex(0); // loop back to start
+                    }
+                }
+
+                function startAuto() {
+                    stopAuto();
+                    autoInterval = setInterval(autoAdvance, autoDelay);
+                }
+
+                function stopAuto() {
+                    if (autoInterval) {
+                        clearInterval(autoInterval);
+                        autoInterval = null;
+                    }
+                }
+
+                // Pause on hover, resume on leave
+                var wrapper = document.getElementById('colTrackWrapper');
+                if (wrapper) {
+                    wrapper.addEventListener('mouseenter', stopAuto);
+                    wrapper.addEventListener('mouseleave', startAuto);
+                }
+
+                // Pause briefly on button click, then resume
+                function pauseAndResume() {
+                    stopAuto();
+                    setTimeout(startAuto, autoDelay);
+                }
+                if (prevBtn) prevBtn.addEventListener('click', pauseAndResume);
+                if (nextBtn) nextBtn.addEventListener('click', pauseAndResume);
+
+                // Pause on drag/touch, resume after
+                track.addEventListener('mousedown', stopAuto);
+                window.addEventListener('mouseup', function () {
+                    if (!isDragging) return;
+                    setTimeout(startAuto, autoDelay);
+                });
+                track.addEventListener('touchstart', stopAuto, { passive: true });
+                track.addEventListener('touchend', function () {
+                    setTimeout(startAuto, autoDelay);
+                }, { passive: true });
+
+                // Start auto-scroll
+                startAuto();
+            })();
         })();
     </script>
 </body>
